@@ -1,6 +1,7 @@
 # AppD Reference Implementation
 
 AppD reference implementation in Nodejs for organizations to:
+
 1. directly, saving a firm from implementing their own AppD
 2. as a starting point by firm implementing their own AppD
 3. as an example of expected behavior from AppD.
