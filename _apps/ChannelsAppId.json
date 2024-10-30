@@ -1,0 +1,68 @@
+{
+  "appId": "ChannelsAppId",
+  "name": "ChannelsApp",
+  "title": "Channels App",
+  "description": "Part of the FDC3 1.2 Conformance Tests",
+  "type": "web",
+  "categories": ["developer tools"],
+  "details": {
+    "url": "https://finos.github.io/FDC3-conformance-framework/v1.2/channels/"
+  },
+  "hostManifests": {
+    "sail": {
+      "injectApi": "1.2",
+      "searchable": false,
+      "forceNewWindow": true
+    },
+    "finsemble": {
+      "window": {
+        "url": "https://finos.github.io/FDC3-conformance-framework/v1.2/channels/",
+        "affinity": "workspaceComponents",
+        "options": {
+          "resizable": true,
+          "autoShow": false,
+          "alwaysOnTop": false,
+          "addToWorkspace": true
+        },
+        "top": "center",
+        "left": "center",
+        "width": 800,
+        "height": 600
+      },
+      "component": {
+        "displayName": "FDC3 Conformance Framework Channels"
+      },
+      "foreign": {
+        "services": {
+          "windowService": {
+            "allowSnapping": true,
+            "allowGrouping": true,
+            "allowTabbing": true,
+            "allowAutoArrange": true,
+            "allowMinimize": true
+          }
+        },
+        "components": {
+          "App Launcher": {
+            "launchableByUser": true
+          },
+          "Window Manager": {
+            "alwaysOnTopIcon": false,
+            "FSBLHeader": {
+              "hideMaximize": false
+            },
+            "persistWindowState": true,
+            "title": "FDC3 Conformance Framework Intent App B"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0.0",
+  "publisher": "Scott Logic",
+  "icons": [
+    {
+      "src": "https://directory.fdc3.finos.org/assets/images/finos-black.png"
+    }
+  ]
+}

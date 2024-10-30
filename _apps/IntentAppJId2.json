@@ -1,0 +1,59 @@
+---
+include: false
+set: conformance_2_0
+data: {
+  "appId": "IntentAppJId",
+  "name": "IntentAppJ",
+  "title": "Intent App J",
+  "description": "Part of the FDC3 2.0 Conformance Tests - developed for FINOS by Scott Logic",
+  "type": "web",
+  "details": {
+    "url": "https://finos.github.io/FDC3-conformance-framework/v2.0/intent-j"
+  },
+  "hostManifests": {
+    "sail": {
+      "inject-api": "2.0",
+      "searchable": false,
+      "forceNewWindow": true
+    },
+    "Finsemble": {
+      "window": {
+        "top": "center",
+        "right": 0,
+        "width": 600,
+        "height": 400
+      },
+      "foreign": {
+        "components": {
+          "App Launcher": {
+            "launchableByUser": false
+          },
+          "Window Manager": {
+            "FSBLHeader": true,
+            "titlebarType": "injected"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0.0",
+  "publisher": "FINOS",
+  "icons": [
+    {
+      "src": "https://directory.fdc3.finos.org/assets/images/finos-black.png"
+    }
+  ],
+  "interop": {
+    "intents": {
+      "listensFor": {
+        "privateChannelIsPrivate": {
+          "displayName": "J Testing Intent",
+          "contexts": [
+            "privateChannelDetails"
+          ],
+          "resultType": "privateChannelIsPrivateResult"
+        }
+      }
+    }
+  }}
+---

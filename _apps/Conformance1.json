@@ -1,0 +1,71 @@
+{
+  "appId": "conformance1",
+  "name": "conformance1",
+  "title": "FDC3 1.2 Conformance",
+  "description": "Testing Conformance",
+  "type": "web",
+  "categories": ["developer tools"],
+  "details": {
+    "url": "https://finos.github.io/FDC3-conformance-framework/v1.2/app/"
+  },
+  "screenshots": [
+    {
+      "src": "https://directory.fdc3.finos.org/assets/app/Conformance1.png"
+    }
+  ],
+  "hostManifests": {
+    "sail": {
+      "injectApi": "1.2"
+    },
+    "finsemble": {
+      "window": {
+        "url": "https://finos.github.io/FDC3-conformance-framework/v1.2/app/",
+        "affinity": "workspaceComponents",
+        "options": {
+          "resizable": true,
+          "autoShow": true,
+          "alwaysOnTop": false,
+          "addToWorkspace": true
+        },
+        "top": "center",
+        "left": "center",
+        "width": 800,
+        "height": 600
+      },
+      "component": {
+        "displayName": "FDC3 Conformance Framework"
+      },
+      "foreign": {
+        "services": {
+          "windowService": {
+            "allowSnapping": true,
+            "allowGrouping": true,
+            "allowTabbing": true,
+            "allowAutoArrange": true,
+            "allowMinimize": true
+          }
+        },
+        "components": {
+          "App Launcher": {
+            "launchableByUser": true
+          },
+          "Window Manager": {
+            "alwaysOnTopIcon": false,
+            "FSBLHeader": {
+              "hideMaximize": false
+            },
+            "persistWindowState": true,
+            "title": "FDC3 Conformance Framework"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0.0",
+  "publisher": "Scott Logic",
+  "icons": [
+    {
+      "src": "https://fdc3.finos.org/assets/fdc3-logo.png"
+    }
+  ]
+}

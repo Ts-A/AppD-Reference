@@ -1,0 +1,40 @@
+---
+set: main
+data: {
+    "appId": "ticker-chart",
+    "name": "ticker-chart",
+    "title": "Ticker Chart",
+    "description": "A demo charting app for FDC3, using data from Polygon.",
+    "icons": [
+      {
+        "src": "https://apps.connectifi-interop.com/tickerChart/icon.png"
+      }
+    ],
+    "screenshots": [
+      {
+        "src": "https://apps.connectifi-interop.com/tickerChart/screenshot.png"
+      }
+    ],
+    "type": "web",
+    "details": {
+      "url": "https://apps.connectifi-interop.com/sail/tickerChart.html"
+    },
+    "interop": {
+      "intents": {
+        "listensFor": {
+          "ViewChart": {
+            "displayName": "View Chart",
+            "contexts": [
+              "fdc3.instrument"
+            ]
+          }
+        }
+      }
+    },
+    "hostManifests": {
+      "sail": {
+        "injectApi": "2.0"
+      }
+    }
+  }
+---
