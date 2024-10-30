@@ -1,0 +1,57 @@
+---
+include: false
+set: conformance_2_0
+data: {
+  "appId": "MetadataAppId",
+  "name": "MetadataApp",
+  "title": "App Title",
+  "description": "Part of the FDC3 2.0 Conformance Tests - developed for FINOS by Scott Logic",
+  "details": {
+    "url": "https://finos.github.io/FDC3-conformance-framework/v2.0/metadata"
+  },
+  "hostManifests": {
+    "sail": {
+      "inject-api": "2.0",
+      "searchable": false,
+      "forceNewWindow": true
+    },
+    "Finsemble": {
+      "window": {
+        "top": "center",
+        "right": 0,
+        "width": 600,
+        "height": 400
+      },
+      "foreign": {
+        "components": {
+          "App Launcher": {
+            "launchableByUser": false
+          },
+          "Window Manager": {
+            "FSBLHeader": true,
+            "titlebarType": "injected"
+          }
+        }
+      },
+      "interop": {
+        "intents": {
+          "listensFor": {}
+        }
+      }
+    }
+  },
+  "version": "1.0.0",
+  "tooltip": "placeholder",
+  "publisher": "FINOS",
+  "type": "web",
+  "icons": [
+    {
+      "src": "https://directory.fdc3.finos.org/assets/images/finos-black.png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://directory.fdc3.finos.org/assets/images/finos-black.png"
+    }
+  ]}
+---

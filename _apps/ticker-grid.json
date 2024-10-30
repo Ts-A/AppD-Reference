@@ -1,0 +1,29 @@
+---
+set: main
+data: {
+    "appId": "ticker-grid",
+    "name": "ticker-grid",
+    "title": "Ticker Grid",
+    "description": "A demo app of a grid display of companies as a starting of point for FDC3 functionality.",
+    "icons": [
+      {
+        "src": "https://apps.connectifi-interop.com/tickerGrid/icon.png"
+      }
+    ],
+    "screenshots": [
+      {
+        "src": "https://apps.connectifi-interop.com/tickerGrid/screenshot.png",
+        "label": "Demo Screenshot"
+      }
+    ],
+    "type": "web",
+    "details": {
+      "url": "https://apps.connectifi-interop.com/sail/tickerGrid.html"
+    },
+    "hostManifests": {
+      "sail": {
+        "injectApi": "2.0"
+      }
+    }
+  }
+---

@@ -1,0 +1,40 @@
+{
+  "appId": "ChannelsAppId",
+  "name": "ChannelsApp",
+  "title": "Channels App",
+  "description": "Part of the FDC3 2.0 Conformance Tests - developed for FINOS by Scott Logic",
+  "type": "web",
+  "details": {
+    "url": "https://finos.github.io/FDC3-conformance-framework/v2.0/channels/"
+  },
+  "hostManifests": {
+    "sail": {
+      "inject-api": "2.0",
+      "searchable": false,
+      "forceNewWindow": true
+    },
+    "Finsemble": {
+      "foreign": {
+        "components": {
+          "App Launcher": {
+            "launchableByUser": false
+          },
+          "Window Manager": {
+            "FSBLHeader": true,
+            "titlebarType": "injected"
+          }
+        }
+      },
+      "interop": {
+        "joinMultipleChannels": false
+      }
+    }
+  },
+  "version": "1.0.0",
+  "publisher": "FINOS",
+  "icons": [
+    {
+      "src": "https://directory.fdc3.finos.org/assets/images/finos-black.png"
+    }
+  ]
+}
