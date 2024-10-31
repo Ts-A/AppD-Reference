@@ -1,7 +1,4 @@
----
-include: false
-set: conformance_2_0
-data: {
+{
   "appId": "IntentAppJId",
   "name": "IntentAppJ",
   "title": "Intent App J",
@@ -48,12 +45,10 @@ data: {
       "listensFor": {
         "privateChannelIsPrivate": {
           "displayName": "J Testing Intent",
-          "contexts": [
-            "privateChannelDetails"
-          ],
+          "contexts": ["privateChannelDetails"],
           "resultType": "privateChannelIsPrivateResult"
         }
       }
     }
-  }}
----
+  }
+}

@@ -1,7 +1,4 @@
----
-include: false
-set: conformance_2_0
-data: {
+{
   "appId": "OpenAppBId",
   "name": "OpenAppB",
   "title": "Open App B",
@@ -42,5 +39,5 @@ data: {
     {
       "src": "https://directory.fdc3.finos.org/assets/images/finos-black.png"
     }
-  ]}
----
+  ]
+}

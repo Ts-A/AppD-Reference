@@ -1,41 +1,36 @@
----
-set: main
-data: {
-    "appId": "news-api",
-    "name": "news-api",
-    "title": "News API",
-    "description": "A demo app using the NewsAPI service to provide basic news search based on a ticker.",
-    "icons": [
-      {
-        "src": "https://apps.connectifi-interop.com/newsAPI/icon.png"
-      }
-    ],
-    "screenshots": [
-      {
-        "src": "https://apps.connectifi-interop.com/newsAPI/screenshot.png",
-        "label": "Demo Screenshot"
-      }
-    ],
-    "type": "web",
-    "details": {
-      "url": "https://apps.connectifi-interop.com/sail/newsAPI.html"
-    },
-    "interop": {
-      "intents": {
-        "listensFor": {
-          "ViewNews": {
-            "displayName": "View News",
-            "contexts": [
-              "fdc3.instrument"
-            ]
-          }
+{
+  "appId": "news-api",
+  "name": "news-api",
+  "title": "News API",
+  "description": "A demo app using the NewsAPI service to provide basic news search based on a ticker.",
+  "icons": [
+    {
+      "src": "https://apps.connectifi-interop.com/newsAPI/icon.png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://apps.connectifi-interop.com/newsAPI/screenshot.png",
+      "label": "Demo Screenshot"
+    }
+  ],
+  "type": "web",
+  "details": {
+    "url": "https://apps.connectifi-interop.com/sail/newsAPI.html"
+  },
+  "interop": {
+    "intents": {
+      "listensFor": {
+        "ViewNews": {
+          "displayName": "View News",
+          "contexts": ["fdc3.instrument"]
         }
       }
-    },
-    "hostManifests": {
-      "sail": {
-        "injectApi": "2.0"
-      }
+    }
+  },
+  "hostManifests": {
+    "sail": {
+      "injectApi": "2.0"
     }
   }
----
+}

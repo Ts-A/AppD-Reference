@@ -1,7 +1,4 @@
----
-include: false
-set: conformance_1_2
-data: {
+{
   "appId": "MockAppId",
   "name": "MockApp",
   "description": "Testing spec conformance",
@@ -9,9 +6,7 @@ data: {
   "details": {
     "url": "https://finos.github.io/FDC3-conformance-framework/v1.2/general/"
   },
-  "categories": [
-    "developer tools",
-  ],
+  "categories": ["developer tools"],
   "hostManifests": {
     "sail": {
       "injectApi": "1.2",
@@ -68,5 +63,5 @@ data: {
     {
       "src": "https://directory.fdc3.finos.org/assets/images/finos-black.png"
     }
-  ]}
----
+  ]
+}
