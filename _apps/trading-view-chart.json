@@ -1,40 +1,35 @@
----
-set: main
-data: {
-    "appId": "trading-view-chart",
-    "name": "trading-view-chart",
-    "title": "TradingView Chart",
-    "description": "A demo app for FDC3 using a charting widget from TradingView.",
-    "icons": [
-      {
-        "src": "https://apps.connectifi-interop.com/tradingviewChart/icon.png"
-      }
-    ],
-    "screenshots": [
-      {
-        "src": "https://apps.connectifi-interop.com/tradingviewChart/screenshot.png"
-      }
-    ],
-    "type": "web",
-    "details": {
-      "url": "https://apps.connectifi-interop.com/sail/tradingviewChart.html"
-    },
-    "interop": {
-      "intents": {
-        "listensFor": {
-          "ViewChart": {
-            "displayName": "View Chart",
-            "contexts": [
-              "fdc3.instrument"
-            ]
-          }
+{
+  "appId": "trading-view-chart",
+  "name": "trading-view-chart",
+  "title": "TradingView Chart",
+  "description": "A demo app for FDC3 using a charting widget from TradingView.",
+  "icons": [
+    {
+      "src": "https://apps.connectifi-interop.com/tradingviewChart/icon.png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://apps.connectifi-interop.com/tradingviewChart/screenshot.png"
+    }
+  ],
+  "type": "web",
+  "details": {
+    "url": "https://apps.connectifi-interop.com/sail/tradingviewChart.html"
+  },
+  "interop": {
+    "intents": {
+      "listensFor": {
+        "ViewChart": {
+          "displayName": "View Chart",
+          "contexts": ["fdc3.instrument"]
         }
       }
-    },
-    "hostManifests": {
-      "sail": {
-        "injectApi": "2.0"
-      }
+    }
+  },
+  "hostManifests": {
+    "sail": {
+      "injectApi": "2.0"
     }
   }
----
+}

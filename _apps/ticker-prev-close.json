@@ -1,40 +1,35 @@
----
-set: main
-data:  {
-    "appId": "ticker-prev-close",
-    "name": "ticker-prev-close",
-    "title": "Ticker Previous Close",
-    "description": "A snapshot of the pricing data for the ticker - going by previous market close, using data from Polygon.",
-    "icons": [
-      {
-        "src": "https://apps.connectifi-interop.com/tickerPrevClose/icon.png"
-      }
-    ],
-    "screenshots": [
-      {
-        "src": "https://apps.connectifi-interop.com/tickerPrevClose/screenshot.png"
-      }
-    ],
-    "type": "web",
-    "details": {
-      "url": "https://apps.connectifi-interop.com/sail/tickerPrevClose.html"
-    },
-    "interop": {
-      "intents": {
-        "listensFor": {
-          "ViewQuote": {
-            "displayName": "View Quote",
-            "contexts": [
-              "fdc3.instrument"
-            ]
-          }
+{
+  "appId": "ticker-prev-close",
+  "name": "ticker-prev-close",
+  "title": "Ticker Previous Close",
+  "description": "A snapshot of the pricing data for the ticker - going by previous market close, using data from Polygon.",
+  "icons": [
+    {
+      "src": "https://apps.connectifi-interop.com/tickerPrevClose/icon.png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://apps.connectifi-interop.com/tickerPrevClose/screenshot.png"
+    }
+  ],
+  "type": "web",
+  "details": {
+    "url": "https://apps.connectifi-interop.com/sail/tickerPrevClose.html"
+  },
+  "interop": {
+    "intents": {
+      "listensFor": {
+        "ViewQuote": {
+          "displayName": "View Quote",
+          "contexts": ["fdc3.instrument"]
         }
       }
-    },
-    "hostManifests": {
-      "sail": {
-        "injectApi": "2.0"
-      }
+    }
+  },
+  "hostManifests": {
+    "sail": {
+      "injectApi": "2.0"
     }
   }
----
+}

@@ -1,7 +1,4 @@
----
-include: false
-set: conformance_1_2
-data: {
+{
   "appId": "IntentAppCId",
   "name": "IntentAppC",
   "title": "Intent App C",
@@ -10,9 +7,7 @@ data: {
   "details": {
     "url": "https://finos.github.io/FDC3-conformance-framework/v1.2/intent-c/"
   },
-  "categories": [
-    "developer tools",
-  ],
+  "categories": ["developer tools"],
   "hostManifests": {
     "sail": {
       "injectApi": "1.2",
@@ -73,12 +68,11 @@ data: {
   "interop": {
     "intents": {
       "listensFor": {
-        "cTestingIntent" : {
-                "displayName": "C Testing Intent",
-                "contexts": ["testContextX"]
-            }
+        "cTestingIntent": {
+          "displayName": "C Testing Intent",
+          "contexts": ["testContextX"]
         }
+      }
     }
   }
 }
----

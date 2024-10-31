@@ -1,7 +1,4 @@
----
-include: false
-set: conformance_2_0
-data: {
+{
   "appId": "IntentAppKId",
   "name": "IntentAppK",
   "title": "Intent App K",
@@ -48,12 +45,10 @@ data: {
       "listensFor": {
         "kTestingIntent": {
           "displayName": "K Testing Intent",
-          "contexts": [
-            "testContextX"
-          ],
+          "contexts": ["testContextX"],
           "resultType": "channel<testContextZ>"
         }
       }
     }
-  }}
----
+  }
+}

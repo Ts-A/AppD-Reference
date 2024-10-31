@@ -1,7 +1,4 @@
----
-include: false
-set: conformance_2_0
-data: {
+{
   "appId": "IntentAppAId",
   "name": "IntentAppA",
   "title": "Intent App A",
@@ -48,18 +45,13 @@ data: {
       "listensFor": {
         "aTestingIntent": {
           "displayName": "A Testing Intent",
-          "contexts": [
-            "testContextX",
-            "testContextZ"
-          ]
+          "contexts": ["testContextX", "testContextZ"]
         },
         "sharedTestingIntent1": {
           "displayName": "Shared Testing Intent",
-          "contexts": [
-            "testContextX"
-          ]
+          "contexts": ["testContextX"]
         }
       }
     }
-  }}
----
+  }
+}

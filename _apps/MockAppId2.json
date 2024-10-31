@@ -1,7 +1,4 @@
----
-include: false
-set: conformance_2_0
-data: {
+{
   "appId": "MockAppId",
   "name": "MockApp",
   "description": "Part of the FDC3 2.0 Conformance Tests - developed for FINOS by Scott Logic",
@@ -44,5 +41,5 @@ data: {
     {
       "src": "https://directory.fdc3.finos.org/assets/images/finos-black.png"
     }
-  ]}
----
+  ]
+}

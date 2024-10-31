@@ -1,41 +1,36 @@
----
-set: main
-data: {
-    "appId": "ticker-details",
-    "name": "ticker-details",
-    "title": "Ticker Details Demo",
-    "description": "A demo of ticker detail information, using data from Polygon.",
-    "icons": [
-      {
-        "src": "https://apps.connectifi-interop.com/tickerDetails/icon.png"
-      }
-    ],
-    "screenshots": [
-      {
-        "src": "https://apps.connectifi-interop.com/tickerDetails/screenshot.png",
-        "label": "Screenshot 1"
-      }
-    ],
-    "type": "web",
-    "details": {
-      "url": "https://apps.connectifi-interop.com/sail/tickerDetails.html"
-    },
-    "interop": {
-      "intents": {
-        "listensFor": {
-          "ViewInstrument": {
-            "displayName": "View Instrument",
-            "contexts": [
-              "fdc3.instrument"
-            ]
-          }
+{
+  "appId": "ticker-details",
+  "name": "ticker-details",
+  "title": "Ticker Details Demo",
+  "description": "A demo of ticker detail information, using data from Polygon.",
+  "icons": [
+    {
+      "src": "https://apps.connectifi-interop.com/tickerDetails/icon.png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://apps.connectifi-interop.com/tickerDetails/screenshot.png",
+      "label": "Screenshot 1"
+    }
+  ],
+  "type": "web",
+  "details": {
+    "url": "https://apps.connectifi-interop.com/sail/tickerDetails.html"
+  },
+  "interop": {
+    "intents": {
+      "listensFor": {
+        "ViewInstrument": {
+          "displayName": "View Instrument",
+          "contexts": ["fdc3.instrument"]
         }
       }
-    },
-    "hostManifests": {
-      "sail": {
-        "injectApi": "1.2"
-      }
+    }
+  },
+  "hostManifests": {
+    "sail": {
+      "injectApi": "1.2"
     }
   }
----
+}
