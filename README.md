@@ -9,6 +9,7 @@ AppD reference implementation in Nodejs for organizations to:
 ## Tech stack
 
 - [Express (Nodejs Framework)](https://expressjs.com/)
+- [TS](https://www.typescriptlang.org/)
 
 ## Useful resources
 
