@@ -7,4 +7,7 @@ const apiRouter = Router();
 apiRouter.use("/v1", v1Router);
 apiRouter.use("/v2", v2Router);
 
+// Latest Version
+apiRouter.use("/", v2Router);
+
 export default apiRouter;
