@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "FDC3 App Directory",
-  description: "A reference app directory implementation.",
+  title: "FINOS | FDC3 AppD",
+  description: "FINOS FDC3 App Directory Reference Implementation",
 };
 
 export default function RootLayout({
