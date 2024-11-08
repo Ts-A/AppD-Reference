@@ -8,10 +8,15 @@ AppD reference implementation in Nodejs for organizations to:
 
 ## Tech stack
 
-- [Express (Nodejs Framework)](https://expressjs.com/)
+- [Express](https://expressjs.com/)
+- [NextJS](https://www.nextjs.org)
 - [TS](https://www.typescriptlang.org/)
 
 ## Useful resources
 
-1. [Problem Statement](https://github.com/finos/community/discussions/331)
-2. [What is AppD?](https://fdc3.finos.org/docs/app-directory/overview)
+[Problem Statement](https://github.com/finos/community/discussions/331)
+[What is AppD?](https://fdc3.finos.org/docs/app-directory/overview)
+
+### UI Mockup
+
+![UI Mockup](image.png)
