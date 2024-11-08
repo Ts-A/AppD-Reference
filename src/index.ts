@@ -6,15 +6,15 @@ import apiRouter from "./api";
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
+app.get("/", (_req: Request, res: Response) => {
+  res.redirect("http://localhost:3000");
 });
 
 app.use("/api/appd", apiRouter);
 
-app.all("*", (req: Request, res: Response) => {
+app.all("*", (_req: Request, res: Response) => {
   res.status(404).json({ error: "Route not found" });
 });
 
