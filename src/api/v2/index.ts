@@ -3,7 +3,7 @@ import { appDRecordController } from "../../controller";
 
 const v2Router = Router();
 
-v2Router.get("/", appDRecordController.getAllAppDRecords);
-v2Router.get("/:appId", appDRecordController.getAppDRecordById);
+v2Router.get("/apps/", appDRecordController.getAllAppDRecords);
+v2Router.get("/apps/:appId", appDRecordController.getAppDRecordById);
 
 export default v2Router;
