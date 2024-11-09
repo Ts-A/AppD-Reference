@@ -37,9 +37,10 @@ export const getAppDRecordById = (req: Request, res: Response) => {
   try {
     let appId = req.params.appId;
 
-    if (!appId || !appId.endsWith(".json")) appId += ".json";
+    if (appId.endsWith(".json"))
+      throw new AppDError("App id should not end with .json", 400);
 
-    const pathToFile = path.join(_appsURL, appId);
+    const pathToFile = path.join(_appsURL, appId + ".json");
 
     if (!fs.existsSync(pathToFile)) throw new AppDError("Invalid app id", 400);
 
