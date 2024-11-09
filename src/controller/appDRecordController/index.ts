@@ -7,11 +7,14 @@ const _appsURL = path.join(__dirname, "../../../_apps/");
 
 export const getAllAppDRecords = (_req: Request, res: Response) => {
   try {
-    const files = fs.readdirSync(_appsURL);
-    const fileContents = files.map((fileName: string) =>
-      JSON.parse(
-        fs.readFileSync(path.join(_appsURL, fileName), { encoding: "utf-8" })
-      )
+    const files = fs
+      .readdirSync(_appsURL)
+      .map((fileName) => path.join(_appsURL, fileName))
+      .filter((filePath) => {
+        return fs.lstatSync(filePath).isFile();
+      });
+    const fileContents = files.map((filePath: string) =>
+      JSON.parse(fs.readFileSync(filePath, { encoding: "utf-8" }))
     );
     res.status(200).json({ applications: fileContents });
   } catch (error: any) {
