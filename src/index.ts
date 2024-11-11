@@ -3,6 +3,9 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import apiRouter from "./api";
 import cors from "cors";
+import swaggerUi from "swagger-ui-express";
+import fs from "fs";
+import path from "path";
 
 dotenv.config();
 
@@ -16,6 +19,18 @@ app.get("/", (_req: Request, res: Response) => {
 });
 
 app.use("/api/appd", apiRouter);
+if (fs.readFileSync(path.join(__dirname, "../app-directory.json")))
+  app.use(
+    "/docs",
+    swaggerUi.serve,
+    swaggerUi.setup(
+      JSON.parse(
+        fs.readFileSync(path.join(__dirname, "../app-directory.json"), {
+          encoding: "utf-8",
+        })
+      )
+    )
+  );
 
 app.all("*", (_req: Request, res: Response) => {
   res.status(404).json({ error: "Route not found" });
