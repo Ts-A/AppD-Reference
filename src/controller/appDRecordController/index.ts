@@ -76,6 +76,47 @@ export const getAppDRecordByIdFromGlobal = async (
   }
 };
 
+export const getAppDRecordIntentsFromGlobal = async (
+  req: Request,
+  res: Response,
+  { id, fqdn }: { id: string; fqdn: string }
+) => {
+  try {
+    const configFilePath = path.join(
+      __dirname,
+      "../../../",
+      "appD.config.json"
+    );
+    const fileContent = JSON.parse(
+      fs.readFileSync(configFilePath, { encoding: "utf-8" })
+    );
+    const instances = fileContent["instances"];
+    if (!instances || !instances[fqdn])
+      throw new AppDError(
+        `${fqdn} domain is not found. Make sure to add it in the appD.config.json`,
+        400
+      );
+
+    const responseFromGlobalInstance = await axios.get(
+      instances[fqdn] + req.baseUrl + "/" + id + "/intents"
+    );
+
+    if (responseFromGlobalInstance.status !== 200)
+      throw new AppDError(responseFromGlobalInstance.data.message, 400);
+
+    res.status(200).json(responseFromGlobalInstance.data);
+  } catch (error) {
+    if (error instanceof AppDError) {
+      res
+        .status(error.statusCode)
+        .json({ message: error.message, code: error.statusCode });
+      return;
+    }
+
+    res.status(400).json({ error: "Something went wrong" });
+  }
+};
+
 const isAuthorized = async (appId: string, authToken: string | undefined) => {
   const configFilePath = path.join(__dirname, "../../../", "appD.config.json");
   const fileContent = JSON.parse(
@@ -122,6 +163,45 @@ export const getAppDRecordById = async (req: Request, res: Response) => {
 
     res.setHeader("Content-Type", "application/json");
     res.status(200).sendFile(pathToFile);
+  } catch (error: any) {
+    if (error instanceof AppDError) {
+      res
+        .status(error.statusCode)
+        .json({ message: error.message, code: error.statusCode });
+      return;
+    }
+
+    res.status(500).json({
+      message: error.message,
+      code: 500,
+    });
+    return;
+  }
+};
+
+export const getAppDRecordIntents = async (req: Request, res: Response) => {
+  try {
+    let appId = req.params.appId.toLowerCase();
+
+    if (appId.includes("@")) {
+      const [id, fqdn] = appId.split("@");
+      getAppDRecordByIdFromGlobal(req, res, { id, fqdn });
+      return;
+    }
+
+    const pathToFile = path.join(_appsURL, appId + ".json");
+
+    if (!fs.existsSync(pathToFile)) throw new AppDError("Invalid app id", 400);
+
+    // check for authorization access
+    if (!(await isAuthorized(appId, req.headers["authorization"])))
+      throw new AppDError("Unauthorized", 403);
+
+    const fileContent = JSON.parse(
+      fs.readFileSync(path.join(pathToFile), { encoding: "utf-8" })
+    );
+    const intents = fileContent?.interop?.intents || [];
+    res.status(200).json({ appId, intents });
   } catch (error: any) {
     if (error instanceof AppDError) {
       res
