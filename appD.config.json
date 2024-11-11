@@ -1,0 +1,5 @@
+{
+  "instances": {
+    "appd1.foo.com": "http://localhost:3002"
+  }
+}
