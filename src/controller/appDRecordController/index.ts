@@ -3,6 +3,7 @@ import path from "path";
 import fs from "fs";
 import { AppDError } from "../../util/Error";
 import axios from "axios";
+import jwt from "jsonwebtoken";
 
 const _appsURL = path.join(__dirname, "../../../_apps/");
 
@@ -75,9 +76,35 @@ export const getAppDRecordByIdFromGlobal = async (
   }
 };
 
-export const getAppDRecordById = (req: Request, res: Response) => {
+const isAuthorized = async (appId: string, authToken: string | undefined) => {
+  const configFilePath = path.join(__dirname, "../../../", "appD.config.json");
+  const fileContent = JSON.parse(
+    fs.readFileSync(configFilePath, { encoding: "utf-8" })
+  );
+  const protectedFiles = fileContent["appd_record_protection"];
+  if (!protectedFiles) return true;
+  const index = protectedFiles.findIndex(
+    (params: any) => params.appId === appId
+  );
+  if (index === -1) return true;
+  const { roles, secret } = protectedFiles[index];
+  if (!roles || !secret) return true;
   try {
-    let appId = req.params.appId;
+    if (!authToken) return false;
+    const split = authToken.split("Bearer ");
+    if (split.length == 1) return false;
+    const token = split[1];
+    const decoded: any = jwt.verify(token, secret);
+    if (roles.includes(decoded["role"])) return true;
+    else return false;
+  } catch (error) {
+    return false;
+  }
+};
+
+export const getAppDRecordById = async (req: Request, res: Response) => {
+  try {
+    let appId = req.params.appId.toLowerCase();
 
     if (appId.includes("@")) {
       const [id, fqdn] = appId.split("@");
@@ -88,6 +115,10 @@ export const getAppDRecordById = (req: Request, res: Response) => {
     const pathToFile = path.join(_appsURL, appId + ".json");
 
     if (!fs.existsSync(pathToFile)) throw new AppDError("Invalid app id", 400);
+
+    // check for authorization access
+    if (!(await isAuthorized(appId, req.headers["authorization"])))
+      throw new AppDError("Unauthorized", 403);
 
     res.setHeader("Content-Type", "application/json");
     res.status(200).sendFile(pathToFile);

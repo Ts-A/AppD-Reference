@@ -1,5 +1,12 @@
 {
   "instances": {
     "appd1.foo.com": "http://localhost:3002"
-  }
+  },
+  "appd_record_protection": [
+    {
+      "appId": "adaptabledemo",
+      "roles": ["user", "admin"],
+      "secret": "secret"
+    }
+  ]
 }
