@@ -20,7 +20,7 @@ export default function AppCard({ data }: { data: any }) {
             alt="logo"
             width="100"
             height="100"
-            className="rounded-full object-contain"
+            className="mix-blend-multiply object-contain"
           />
         </div>
         <div className="pl-[15px] flex-1 py-[10px] px-[20px]">
