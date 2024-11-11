@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 
 export default function AppCard() {
   return (
-    <div className="w-full flex flex-col border-2 py-[10px] px-[20px] rounded-lg">
+    <div className="w-[95%] mx-auto flex flex-col border-2 py-[10px] px-[20px] rounded-lg transition transform hover:scale-105 hover:shadow-lg hover:opacity-90 duration-200 shadow-md">
       <div className="flex flex-row">
         <div>
           <Image
