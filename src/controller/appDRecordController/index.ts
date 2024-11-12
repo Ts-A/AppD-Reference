@@ -217,3 +217,52 @@ export const getAppDRecordIntents = async (req: Request, res: Response) => {
     return;
   }
 };
+
+export const createAppDRecord = async (req: Request, res: Response) => {
+  try {
+    const { appId, name, manifest, manifestType, title } = req.body;
+    if (!appId || !name || !manifest || !manifestType || !title)
+      throw new AppDError(
+        "One or more mandatory fields missing: appId, name, manifest, manifestType, title",
+        400
+      );
+    const existingIndex = fs
+      .readdirSync(_appsURL)
+      .map((fileName) => path.join(_appsURL, fileName))
+      .filter((filePath) => {
+        return fs.lstatSync(filePath).isFile();
+      })
+      .findIndex((filePath: string) => {
+        const fileContent = JSON.parse(
+          fs.readFileSync(filePath, { encoding: "utf-8" })
+        );
+        return fileContent["appId"] === appId;
+      });
+    if (existingIndex !== -1) throw new AppDError("Enter a unique appId", 400);
+
+    // TODO: Can add validation
+    fs.writeFileSync(
+      path.join(_appsURL, appId + ".json"),
+      JSON.stringify(req.body),
+      {
+        encoding: "utf-8",
+      }
+    );
+
+    res.status(201).json({ message: "success" });
+  } catch (error: any) {
+    console.log(error);
+    if (error instanceof AppDError) {
+      res
+        .status(error.statusCode)
+        .json({ message: error.message, code: error.statusCode });
+      return;
+    }
+
+    res.status(500).json({
+      message: error.message,
+      code: 500,
+    });
+    return;
+  }
+};

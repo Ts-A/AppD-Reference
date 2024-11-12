@@ -13,7 +13,7 @@ const app: Express = express();
 const port = process.env.PORT || 3001;
 
 app.use(cors());
-
+app.use(express.json());
 app.get("/", (_req: Request, res: Response) => {
   res.redirect("http://localhost:3000");
 });

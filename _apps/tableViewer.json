@@ -1,0 +1,7 @@
+{
+  "appId": "tableViewer",
+  "name": "tableViewer",
+  "title": "Table Viewer",
+  "manifest": "manifest",
+  "manifestType": "manifestURL"
+}
