@@ -119,6 +119,7 @@ export const getAppDRecordIntentsFromGlobal = async (
 
 const isAuthorized = async (appId: string, authToken: string | undefined) => {
   const configFilePath = path.join(__dirname, "../../../", "appD.config.json");
+  if (!fs.existsSync(configFilePath)) return true;
   const fileContent = JSON.parse(
     fs.readFileSync(configFilePath, { encoding: "utf-8" })
   );
