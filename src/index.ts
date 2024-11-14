@@ -16,7 +16,7 @@ const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
-app.get("/", async (req: Request, res: Response) => {
+app.get("/", async (_req: Request, res: Response) => {
   try {
     const response = await axios.get("http://localhost:3000/ping");
     if (response.status !== 200) {

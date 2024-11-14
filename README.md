@@ -73,8 +73,8 @@ This part is for setting up jwt authentication, static configuration of instance
 
 ## Useful resources
 
-[Problem Statement](https://github.com/finos/community/discussions/331)
-[What is AppD?](https://fdc3.finos.org/docs/app-directory/overview)
+- [Problem Statement](https://github.com/finos/community/discussions/331)
+- [What is AppD?](https://fdc3.finos.org/docs/app-directory/overview)
 
 ### UI Mockup
 
