@@ -35,6 +35,8 @@ cp sample.env .env
 # Setup env variables
 npm install
 npm run dev
+
+# to get all the apps -> http://localhost:3001/api/appd/v2/apps/
 ```
 
 ### UI Catalog
@@ -43,6 +45,9 @@ npm run dev
 cd AppD-Reference/ui
 npm install
 npm run dev
+
+# to see the ui -> http://localhost:3000
+# to see the ui from the server -> http://localhost:3001/
 ```
 
 ### Plugins

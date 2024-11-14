@@ -6,6 +6,7 @@ import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import fs from "fs";
 import path from "path";
+import axios from "axios";
 
 dotenv.config();
 
@@ -14,8 +15,20 @@ const port = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
-app.get("/", (_req: Request, res: Response) => {
-  res.redirect("http://localhost:3000");
+
+app.get("/", async (req: Request, res: Response) => {
+  try {
+    const response = await axios.get("http://localhost:3000/ping");
+    if (response.status !== 200) {
+      throw new Error("No UI catalog found.");
+    }
+    res.redirect("http://localhost:3000");
+  } catch (error: any) {
+    res.status(200).json({
+      message: "ok",
+      details: "No UI Catalog found.",
+    });
+  }
 });
 
 app.use("/api/appd", apiRouter);
