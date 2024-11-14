@@ -34,7 +34,7 @@ cd AppD-Reference
 cp sample.env .env
 # Setup env variables
 npm install
-npm run start
+npm run dev
 ```
 
 ### UI Catalog

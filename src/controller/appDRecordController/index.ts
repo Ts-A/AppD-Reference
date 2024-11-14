@@ -220,6 +220,7 @@ export const getAppDRecordIntents = async (req: Request, res: Response) => {
 
 export const createAppDRecord = async (req: Request, res: Response) => {
   try {
+    console.log(req.body);
     const { appId, name, manifest, manifestType, title } = req.body;
     if (!appId || !name || !manifest || !manifestType || !title)
       throw new AppDError(

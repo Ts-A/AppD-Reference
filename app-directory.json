@@ -135,13 +135,10 @@
       },
       "post": {
         "summary": "Create a new appD Record",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
         "requestBody": {
-          "required": true,
-          "content": {
-            "schema": {
-              "$ref": "#/components/schemas/Application"
-            }
-          }
+          "$ref": "#/components/schemas/Application"
         },
         "responses": {
           "200": {

@@ -14,17 +14,14 @@ export default function AppdHeader() {
             Finos <SquareArrowOutUpRight className="w-4 h-4" />
           </Button>
         </Link>
-        <Link
-          href="https://fdc3.finos.org/docs/app-directory/overview"
-          target="_blank"
-        >
+        <Link href="http://localhost:3001/docs" target="_blank">
           <Button variant="link" className="text-zinc-100 px-1 mr-2">
             Docs <SquareArrowOutUpRight className="w-4 h-4" />
           </Button>
         </Link>
-        <Button variant="secondary" size="sm">
+        {/* <Button variant="secondary" size="sm">
           Add your app
-        </Button>
+        </Button> */}
       </div>
       <div className="w-full h-[150px] bg-zinc-900/75 flex justify-center items-center">
         <h1 className="text-2xl font-bold ">FDC3 App Directory</h1>
