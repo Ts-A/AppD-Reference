@@ -46,13 +46,16 @@ export const getAppDRecordByIdFromGlobal = async (
       "../../../",
       "appD.config.json"
     );
+    // If no appD.config.json is found, assumes it doesn't support namespace resolution
+    if (!fs.existsSync(configFilePath))
+      throw new AppDError("Missing appD.config.json in root directory.", 400);
     const fileContent = JSON.parse(
       fs.readFileSync(configFilePath, { encoding: "utf-8" })
     );
     const instances = fileContent["instances"];
     if (!instances || !instances[fqdn])
       throw new AppDError(
-        `${fqdn} domain is not found. Make sure to add it in the appD.config.json`,
+        `${fqdn} domain is not found. To add a new domain, add a new key-value pair under instances specifying the fqdn as key and server url as the value. If no instances is found, create an instances object and follow the steps.`,
         400
       );
 
@@ -72,7 +75,9 @@ export const getAppDRecordByIdFromGlobal = async (
       return;
     }
 
-    res.status(400).json({ error: "Something went wrong" });
+    res.status(400).json({
+      error: `Something went wrong. Possible error: ${fqdn} not found. To fix: Make sure to check if ${fqdn} is running on the specified url from appD.config.json`,
+    });
   }
 };
 
@@ -87,13 +92,17 @@ export const getAppDRecordIntentsFromGlobal = async (
       "../../../",
       "appD.config.json"
     );
+    // If no appD.config.json is found, assumes it doesn't support namespace resolution
+    if (!fs.existsSync(configFilePath))
+      throw new AppDError("Missing appD.config.json in root directory.", 400);
+
     const fileContent = JSON.parse(
       fs.readFileSync(configFilePath, { encoding: "utf-8" })
     );
     const instances = fileContent["instances"];
     if (!instances || !instances[fqdn])
       throw new AppDError(
-        `${fqdn} domain is not found. Make sure to add it in the appD.config.json`,
+        `${fqdn} domain is not found. To add a new domain, add a new key-value pair under instances specifying the fqdn as key and server url as the value. If no instances is found, create an instances object and follow the steps.`,
         400
       );
 
@@ -113,23 +122,29 @@ export const getAppDRecordIntentsFromGlobal = async (
       return;
     }
 
-    res.status(400).json({ error: "Something went wrong" });
+    res.status(400).json({
+      error: `Something went wrong. Possible error: ${fqdn} not found. To fix: Make sure to check if ${fqdn} is running on the specified url from appD.config.json`,
+    });
   }
 };
 
 const isAuthorized = async (appId: string, authToken: string | undefined) => {
   const configFilePath = path.join(__dirname, "../../../", "appD.config.json");
+  // If no appD.config.json is found, considers no authorization is required.
   if (!fs.existsSync(configFilePath)) return true;
   const fileContent = JSON.parse(
     fs.readFileSync(configFilePath, { encoding: "utf-8" })
   );
+  // If no appd_record_protection key is found, considers no authorization is required.
   const protectedFiles = fileContent["appd_record_protection"];
   if (!protectedFiles) return true;
   const index = protectedFiles.findIndex(
     (params: any) => params.appId === appId
   );
+  // If no appd_record with appId is found, considers the file doesn't require special authorization.
   if (index === -1) return true;
   const { roles, secret } = protectedFiles[index];
+  // If no roles or secret has been specified, considers the file doesn't require special authorization.
   if (!roles || !secret) return true;
   try {
     if (!authToken) return false;
@@ -148,6 +163,7 @@ export const getAppDRecordById = async (req: Request, res: Response) => {
   try {
     let appId = req.params.appId.toLowerCase();
 
+    // TODO: If fqdn is current domain, must not try to find from local server.
     if (appId.includes("@")) {
       const [id, fqdn] = appId.split("@");
       getAppDRecordByIdFromGlobal(req, res, { id, fqdn });
