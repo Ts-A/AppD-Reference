@@ -78,9 +78,7 @@
             }
           }
         },
-        "tags": [
-          "Application"
-        ]
+        "tags": ["v2 AppD Records"]
       }
     },
     "/v2/apps": {
@@ -133,9 +131,7 @@
             }
           }
         },
-        "tags": [
-          "Application"
-        ]
+        "tags": ["v2 AppD Records"]
       },
       "post": {
         "summary": "Insert a new appD record",
@@ -162,9 +158,36 @@
             "description": "Default error sample response"
           }
         },
-        "tags": [
-          "Application"
-        ]
+        "tags": ["v2 AppD Records"]
+      }
+    },
+    "/v2/apps/{appId}/intents": {
+      "summary": "Intents for an AppD record",
+      "parameters": [
+        {
+          "name": "appId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "summary": "Get intents for an AppD record",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": ["v2 AppD Records"]
       }
     }
   },
@@ -288,12 +311,7 @@
       },
       "Application": {
         "description": "Defines an application retrieved from an FDC3 App Directory, which can then be launched.\nLaunching typically means running for a user on a desktop. The details around 'launching' including who or what might do it, and how the launch action is initiated are discussed elsewhere in the FDC3 App Directory spec.\n",
-        "required": [
-          "appId",
-          "name",
-          "type",
-          "details"
-        ],
+        "required": ["appId", "name", "type", "details"],
         "allOf": [
           {
             "$ref": "#/components/schemas/BaseApplication"
@@ -379,13 +397,7 @@
       "Type": {
         "type": "string",
         "description": "The technology type that is used to launch and run the application. \nEach application type implies a particular set of launch `details`.\nThe supported types include:\n\n- `web`: Web applications launched via a URL\n- `native`: Native applications pre-installed on a device and launch via a filesystem path\n- `citrix`: Apps virtualized via Citrix\n- `onlineNative`: Native apps that have an online launcher, e.g. online ClickOnce app deployments.\n- `other`: Used to represent apps that do not conform to or cannot be launched via the other types, and are likely to be defined solely by a hostManifest.\n\nFDC3 Desktop Agents MUST support at least the `web` application type and MAY support any or all of the other types.\n",
-        "enum": [
-          "web",
-          "native",
-          "citrix",
-          "onlineNative",
-          "other"
-        ]
+        "enum": ["web", "native", "citrix", "onlineNative", "other"]
       },
       "LaunchDetails": {
         "description": "The type specific launch details of the application. These details are intended to be  vendor-agnostic and MAY be duplicated or overridden by details provided in the hostManifests  object for a specific host.",
@@ -409,9 +421,7 @@
       },
       "WebAppDetails": {
         "description": "Properties used to launch apps with `type: web`.",
-        "required": [
-          "url"
-        ],
+        "required": ["url"],
         "properties": {
           "url": {
             "type": "string",
@@ -423,9 +433,7 @@
       },
       "NativeAppDetails": {
         "description": "Properties used to launch apps with `type: native` that are already installed on the device.",
-        "required": [
-          "path"
-        ],
+        "required": ["path"],
         "properties": {
           "path": {
             "type": "string",
@@ -440,9 +448,7 @@
       },
       "CitrixAppDetails": {
         "description": "Properties used to launch apps virtualized apps with `type: citrix`.",
-        "required": [
-          "alias"
-        ],
+        "required": ["alias"],
         "properties": {
           "alias": {
             "type": "string",
@@ -457,9 +463,7 @@
       },
       "OnlineNativeAppDetails": {
         "description": "Properties used to launch a native apps with `type: onlineNative` that have an online launcher, e.g. online ClickOnce app deployments.",
-        "required": [
-          "url"
-        ],
+        "required": ["url"],
         "properties": {
           "url": {
             "type": "string",
@@ -503,9 +507,7 @@
       },
       "Intent": {
         "description": "Definition of an intent that an app listens for",
-        "required": [
-          "contexts"
-        ],
+        "required": ["contexts"],
         "properties": {
           "displayName": {
             "type": "string",
@@ -583,9 +585,7 @@
             "description": "Describes the application's use of App Channels.\n\nThis metadata is not currently used by the desktop agent, but is provided to help find apps \nthat will interoperate with this app and to document API interactions for use by other app \ndevelopers.\n",
             "items": {
               "type": "object",
-              "required": [
-                "name"
-              ],
+              "required": ["name"],
               "properties": {
                 "name": {
                   "type": "string",
@@ -613,153 +613,6 @@
             }
           }
         }
-      },
-      "AppImageV1": {
-        "description": "App Image holder",
-        "properties": {
-          "url": {
-            "type": "string",
-            "format": "uri",
-            "description": "App Image URL"
-          }
-        }
-      },
-      "IconV1": {
-        "description": "(Deprecated v1 API version) Icon holder",
-        "properties": {
-          "icon": {
-            "type": "string",
-            "format": "uri",
-            "description": "Icon URL"
-          }
-        }
-      },
-      "IntentV1": {
-        "description": "(Deprecated v1 API version) An intent definition as defined by spec https://github.com/FDC3/Intents/blob/main/src/Intent.yaml",
-        "required": [
-          "name"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "The name of the intent to 'launch'. In this case the name of an Intent supported by an application."
-          },
-          "displayName": {
-            "type": "string",
-            "description": "An optional display name for the intent that may be used in UI instead of the name."
-          },
-          "contexts": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "A comma separated list of the types of contexts the intent offered by the application can process.  where the first part of the context type is the namespace e.g.\"fdc3.contact, org.symphony.contact\""
-          },
-          "customConfig": {
-            "type": "object",
-            "description": "Custom configuration for the intent that may be required for a particular desktop agent."
-          }
-        }
-      },
-      "ApplicationV1": {
-        "description": "(Deprecated v1 API version) Defines an application retrieved from an FDC3 App Directory, which can then be launched. Launching typically means running for a user on a desktop.  The details around 'launching' including who or what might do it, and how the launch action is initiated are discussed elsewhere in the FDC3 App Directory spec.\n",
-        "required": [
-          "appId",
-          "name",
-          "manifest",
-          "manifestType"
-        ],
-        "properties": {
-          "appId": {
-            "type": "string",
-            "description": "The unique application identifier located within a specific application directory instance.\n"
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the application. The name should be unique within an FDC3 App Directory instance. The exception to the uniqueness constraint is that an App Directory can hold definitions for multiple versions of the same app. The same appName could occur in other directories. We are not currently specifying app name conventions in the document.\n"
-          },
-          "manifest": {
-            "type": "string",
-            "description": "URI or full JSON of the application manifest providing all details related to launch and use requirements as described by the vendor. The format of this manifest is vendor specific, but can be identified by the manifestType attribute.\n"
-          },
-          "manifestType": {
-            "type": "string",
-            "description": "The manifest type which relates to the format and structure of the manifest content. The definition is based on the vendor specific format and definition outside of this specification.\n"
-          },
-          "version": {
-            "type": "string",
-            "description": "Version of the application. This allows multiple app versions to be defined using the same app name. This can be a triplet but can also include things like 1.2.5 (BETA)"
-          },
-          "title": {
-            "type": "string",
-            "description": "Optional title for the application, if missing use appName, typically used in a launcher UI."
-          },
-          "tooltip": {
-            "type": "string",
-            "description": "Optional tooltip description e.g. for a launcher"
-          },
-          "description": {
-            "type": "string",
-            "description": "Description of the application. This will typically be a 1-2 paragraph style blurb about the application. Allow mark up language"
-          },
-          "images": {
-            "type": "array",
-            "description": "Array of images to show the user when they are looking at app description. Each image can have an optional description/tooltip",
-            "items": {
-              "$ref": "#/components/schemas/AppImageV1"
-            }
-          },
-          "contactEmail": {
-            "type": "string",
-            "format": "email",
-            "description": "Optional e-mail to receive queries about the application"
-          },
-          "supportEmail": {
-            "type": "string",
-            "format": "email",
-            "description": "Optional e-mail to receive support requests for the application"
-          },
-          "publisher": {
-            "type": "string",
-            "description": "The name of the company that owns the application. The publisher has control over their namespace/app/signature."
-          },
-          "icons": {
-            "type": "array",
-            "description": "Holds Icons used for the application, a Launcher may be able to use multiple Icon sizes or there may be a 'button' Icon",
-            "items": {
-              "$ref": "#/components/schemas/IconV1"
-            }
-          },
-          "customConfig": {
-            "type": "array",
-            "description": "An optional set of name value pairs that can be used to deliver custom data from an App Directory to a launcher.",
-            "items": {
-              "$ref": "#/components/schemas/NameValuePair"
-            }
-          },
-          "intents": {
-            "type": "array",
-            "description": "The list of intents implemented by the application as defined by https://github.com/FDC3/Intents/blob/main/src/Intent.yaml\n",
-            "items": {
-              "$ref": "#/components/schemas/IntentV1"
-            }
-          }
-        }
-      },
-      "ApplicationSearchResponseV1": {
-        "properties": {
-          "applications": {
-            "type": "array",
-            "description": "List of applications\n",
-            "items": {
-              "$ref": "#/components/schemas/ApplicationV1"
-            }
-          },
-          "message": {
-            "type": "string",
-            "description": "Response message providing status of query\n"
-          }
-        }
       }
     },
     "examples": {
@@ -769,10 +622,7 @@
           "name": "fdc3-workbench",
           "title": "FDC3 Workbench",
           "description": "Development and test tool for FDC3 desktop agents and apps",
-          "categories": [
-            "developer tools",
-            "training"
-          ],
+          "categories": ["developer tools", "training"],
           "version": "1.0.0",
           "tooltip": "FDC3 Workbench",
           "lang": "en-US",
@@ -860,11 +710,7 @@
           "name": "my-application",
           "title": "My Application",
           "description": "An example application that uses FDC3 and fully describes itself in an AppD record.",
-          "categories": [
-            "market data",
-            "research",
-            "news"
-          ],
+          "categories": ["market data", "research", "news"],
           "version": "1.0.0",
           "tooltip": "My example application definition",
           "lang": "en-US",
@@ -948,48 +794,29 @@
               "listensFor": {
                 "ViewChart": {
                   "displayName": "View Chart",
-                  "contexts": [
-                    "fdc3.instrument"
-                  ]
+                  "contexts": ["fdc3.instrument"]
                 },
                 "myApp.GetPrice": {
                   "displayName": "Get Price",
-                  "contexts": [
-                    "fdc3.instrument"
-                  ],
+                  "contexts": ["fdc3.instrument"],
                   "resultType": "myApp.quote"
                 }
               },
               "raises": {
-                "ViewOrders": [
-                  "fdc3.instrument",
-                  "fdc3.organization"
-                ],
-                "StartEmail": [
-                  "fdc3.email"
-                ]
+                "ViewOrders": ["fdc3.instrument", "fdc3.organization"],
+                "StartEmail": ["fdc3.email"]
               }
             },
             "userChannels": {
-              "broadcasts": [
-                "fdc3.instrument",
-                "fdc3.organization"
-              ],
-              "listensFor": [
-                "fdc3.instrument",
-                "fdc3.organization"
-              ]
+              "broadcasts": ["fdc3.instrument", "fdc3.organization"],
+              "listensFor": ["fdc3.instrument", "fdc3.organization"]
             },
             "appChannels": [
               {
                 "name": "myApp.quotes,",
                 "description": "Used to share a stream of quotes for currently displayed instrument and may be used to change the currently displayed symbol,",
-                "broadcasts": [
-                  "myApp.quote"
-                ],
-                "listensFor": [
-                  "fdc3.instrument"
-                ]
+                "broadcasts": ["myApp.quote"],
+                "listensFor": ["fdc3.instrument"]
               }
             ]
           },
@@ -1010,11 +837,7 @@
               "name": "my-application",
               "title": "My Application",
               "description": "An example application that uses FDC3 and fully describes itself in an AppD record.",
-              "categories": [
-                "market data",
-                "research",
-                "news"
-              ],
+              "categories": ["market data", "research", "news"],
               "version": "1.0.0",
               "tooltip": "My example application definition",
               "lang": "en-US",
@@ -1098,48 +921,29 @@
                   "listensFor": {
                     "ViewChart": {
                       "displayName": "View Chart",
-                      "contexts": [
-                        "fdc3.instrument"
-                      ]
+                      "contexts": ["fdc3.instrument"]
                     },
                     "myApp.GetPrice": {
                       "displayName": "Get Price",
-                      "contexts": [
-                        "fdc3.instrument"
-                      ],
+                      "contexts": ["fdc3.instrument"],
                       "resultType": "myApp.quote"
                     }
                   },
                   "raises": {
-                    "ViewOrders": [
-                      "fdc3.instrument",
-                      "fdc3.organization"
-                    ],
-                    "StartEmail": [
-                      "fdc3.email"
-                    ]
+                    "ViewOrders": ["fdc3.instrument", "fdc3.organization"],
+                    "StartEmail": ["fdc3.email"]
                   }
                 },
                 "userChannels": {
-                  "broadcasts": [
-                    "fdc3.instrument",
-                    "fdc3.organization"
-                  ],
-                  "listensFor": [
-                    "fdc3.instrument",
-                    "fdc3.organization"
-                  ]
+                  "broadcasts": ["fdc3.instrument", "fdc3.organization"],
+                  "listensFor": ["fdc3.instrument", "fdc3.organization"]
                 },
                 "appChannels": [
                   {
                     "name": "myApp.quotes,",
                     "description": "Used to share a stream of quotes for currently displayed instrument and may be used to change the currently displayed symbol,",
-                    "broadcasts": [
-                      "myApp.quote"
-                    ],
-                    "listensFor": [
-                      "fdc3.instrument"
-                    ]
+                    "broadcasts": ["myApp.quote"],
+                    "listensFor": ["fdc3.instrument"]
                   }
                 ]
               },
@@ -1155,10 +959,7 @@
               "name": "fdc3-workbench",
               "title": "FDC3 Workbench",
               "description": "Development and test tool for FDC3 desktop agents and apps",
-              "categories": [
-                "developer tools",
-                "training"
-              ],
+              "categories": ["developer tools", "training"],
               "version": "1.0.0",
               "tooltip": "FDC3 Workbench",
               "lang": "en-US",
