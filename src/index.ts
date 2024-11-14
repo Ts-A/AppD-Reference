@@ -32,18 +32,26 @@ app.get("/", async (req: Request, res: Response) => {
 });
 
 app.use("/api/appd", apiRouter);
-if (fs.readFileSync(path.join(__dirname, "../app-directory.json")))
-  app.use(
-    "/docs",
-    swaggerUi.serve,
-    swaggerUi.setup(
-      JSON.parse(
-        fs.readFileSync(path.join(__dirname, "../app-directory.json"), {
-          encoding: "utf-8",
-        })
-      )
+
+app.use(
+  "/docs",
+  (_req: Request, res: Response, next: any) => {
+    if (fs.readFileSync(path.join(__dirname, "../app-directory.json")))
+      return next();
+    res.status(400).json({
+      message:
+        "No docs setup. Consider adding app-directory.json in the root directory.",
+    });
+  },
+  swaggerUi.serve,
+  swaggerUi.setup(
+    JSON.parse(
+      fs.readFileSync(path.join(__dirname, "../app-directory.json"), {
+        encoding: "utf-8",
+      })
     )
-  );
+  )
+);
 
 app.all("*", (_req: Request, res: Response) => {
   res.status(404).json({ error: "Route not found" });

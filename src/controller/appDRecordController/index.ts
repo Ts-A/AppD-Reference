@@ -242,13 +242,9 @@ export const getAppDRecordIntents = async (req: Request, res: Response) => {
 
 export const createAppDRecord = async (req: Request, res: Response) => {
   try {
-    console.log(req.body);
-    const { appId, name, manifest, manifestType, title } = req.body;
-    if (!appId || !name || !manifest || !manifestType || !title)
-      throw new AppDError(
-        "One or more mandatory fields missing: appId, name, manifest, manifestType, title",
-        400
-      );
+    const { appId, name, /* manifest, manifestType, */ title } = req.body;
+    if (!appId || !name || /* !manifest || !manifestType || */ !title)
+      throw new AppDError("One or more mandatory fields missing.", 400);
     const existingIndex = fs
       .readdirSync(_appsURL)
       .map((fileName) => path.join(_appsURL, fileName))
@@ -286,6 +282,5 @@ export const createAppDRecord = async (req: Request, res: Response) => {
       message: error.message,
       code: 500,
     });
-    return;
   }
 };
