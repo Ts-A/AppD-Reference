@@ -9,15 +9,20 @@ const _appsURL = path.join(__dirname, "../../../_apps/");
 
 export const getAllAppDRecords = (_req: Request, res: Response) => {
   try {
+    if (!fs.existsSync(_appsURL))
+      throw new AppDError("_apps folder not found in root directory", 400);
+
     const files = fs
       .readdirSync(_appsURL)
       .map((fileName) => path.join(_appsURL, fileName))
       .filter((filePath) => {
         return fs.lstatSync(filePath).isFile();
       });
+
     const fileContents = files.map((filePath: string) =>
       JSON.parse(fs.readFileSync(filePath, { encoding: "utf-8" }))
     );
+
     res.status(200).json({ applications: fileContents });
   } catch (error: any) {
     if (error instanceof AppDError) {
